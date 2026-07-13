@@ -42,9 +42,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4
-      # ── Populated during /decompose from SPEC.md §Toolchain ──
-      # - uses: actions/setup-node@...   (pin by SHA)
-      # - run: npm ci
-      # - run: npm run lint
-      # - run: npm test
-      - run: echo "Toolchain jobs are generated from SPEC.md §Toolchain by task T-CI"
+      # Toolchain per SPEC.md §Toolchain / ADR-001: Python 3 stdlib only.
+      # ubuntu-latest ships python3 >= 3.12 — no setup action, nothing new to pin.
+      - name: Lint (byte-compile)
+        run: python3 -m compileall -q examples/todo-cli framework/scripts
+      - name: Unit tests (todo-cli)
+        run: cd examples/todo-cli && python3 -m unittest discover -s tests -t . -v
+      - name: STATE.md drift check
+        run: python3 framework/scripts/forge-state.py --check

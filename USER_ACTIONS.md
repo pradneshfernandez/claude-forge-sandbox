@@ -37,7 +37,11 @@ stubbing. When you finish one, mark it done and tell Claude "UA-<n> done".
 - **When done:** tell Claude "UA-2 done" (or leave it deferred indefinitely).
 
 ### UA-3: Paste the generated CI toolchain job into ci.yml
-- **Status:** open
+- **Status:** done (2026-07-14) — the user directed the orchestrating session to apply
+  the toolchain job directly, so the paste step was not needed. The job uses the
+  runner's system python3 (stdlib-only toolchain per ADR-001), so no new action SHAs
+  were introduced; checkout remains the only pinned action. Remaining check: confirm
+  the Actions run is green on GitHub after the next push.
 - **Blocks:** T-005
 - **Why it's needed:** Workflow files are a protected path (supply-chain surface).
 - **Exact steps:**
