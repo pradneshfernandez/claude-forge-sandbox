@@ -97,7 +97,7 @@ def save(path: str, todos: list) -> None:
         os.makedirs(parent_dir, exist_ok=True)
 
     # Create temp file in the same directory as the target path
-    temp_fd, temp_path = tempfile.mkstemp(dir=parent_dir if parent_dir else None)
+    temp_fd, temp_path = tempfile.mkstemp(dir=parent_dir)
 
     try:
         # Write JSON to temp file

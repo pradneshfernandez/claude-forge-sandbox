@@ -1,8 +1,8 @@
 # Project State
 
-- **Phase:** bootstrap — wave 1 complete (T-003 deferred, not blocking); T-004 dry-run decomposition produced the todo-cli task DAG (waves 4–6)
-- **Current wave:** 2 (T-004 in progress); todo-cli execution begins at wave 4
-- **Last handoff:** —
+- **Phase:** bootstrap — wave 1 complete (T-003 deferred, not blocking); todo-cli fully built, tested, and reviewed (T-007–T-010 all done). Next: /execute-wave for T-005/T-006.
+- **Current wave:** 6 complete; reviewed (1 CHANGES round on T-009, fixed and reverified)
+- **Last handoff:** docs/handoff/001-todo-cli-dry-run.md
 
 ## Task board
 | ID | Title | Status | Wave | Model | Owns (top path) |
@@ -10,13 +10,13 @@
 | T-001 | Verify policy hooks fire correctly | done | 1 | haiku | .claude/audit/ |
 | T-002 | Tailor permission allow-list | done | 1 | haiku | — (propose only) |
 | T-003 | Wire repository governance | deferred | 1 | haiku | — (guide only) |
-| T-004 | Pipeline dry run on toy spec | ready | 2 | sonnet | SPEC.md, tasks/ |
+| T-004 | Pipeline dry run on toy spec | done | 2 | sonnet | SPEC.md, tasks/ |
 | T-005 | Generate CI toolchain jobs | pending | 3 | haiku | — (propose only) |
 | T-006 | Token telemetry baseline | pending | 3 | haiku | docs/telemetry.md |
-| T-007 | Scaffold todo-cli package skeleton & test-package marker | pending | 4 | haiku | examples/todo-cli/tests/__init__.py |
-| T-008 | Implement core.py pure todo operations | pending | 5 | haiku | examples/todo-cli/core.py |
-| T-009 | Implement storage.py JSON persistence (atomic) | pending | 5 | haiku | examples/todo-cli/storage.py |
-| T-010 | Implement todo.py argparse CLI | pending | 6 | sonnet | examples/todo-cli/todo.py |
+| T-007 | Scaffold todo-cli package skeleton & test-package marker | done | 4 | haiku | examples/todo-cli/tests/__init__.py |
+| T-008 | Implement core.py pure todo operations | done | 5 | haiku | examples/todo-cli/core.py |
+| T-009 | Implement storage.py JSON persistence (atomic) | done | 5 | haiku | examples/todo-cli/storage.py |
+| T-010 | Implement todo.py argparse CLI | done | 6 | sonnet | examples/todo-cli/todo.py |
 
 ## Waves (todo-cli, from T-004 decomposition)
 | Wave | Tasks (parallel) | Depends on | Notes |
