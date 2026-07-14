@@ -115,7 +115,7 @@ routes BLOCKED files back to the Planner (opus) at the start of the next wave.
 - Research goes through the Explorer subagent (haiku) — raw file dumps stay out of
   the main context; only summaries return.
 - Never re-read a file already in context. Never `cat` lockfiles, build output,
-  or node_modules (also blocked by .claudeignore).
+  or node_modules (Read-denied in .claude/settings.json).
 - Command output should be filtered at source: `--quiet`, `| tail`, `--reporter=dot`.
 - One logical task per session. Long sessions degrade quality and multiply cost.
 
@@ -145,7 +145,7 @@ STATE.md + the latest handoff — and nothing else — to resume.
 | Script            | Purpose                                                        |
 |-------------------|----------------------------------------------------------------|
 | forge-state.py    | Generate the STATE.md task board from tasks/*.md frontmatter. `--write` updates the marker block, `--check` fails CI on drift. |
-| sync-instance.sh  | Copy the reusable tooling (.claude/ agents, commands, hooks, rules, templates, scripts, PROTOCOL.md; .claudeignore) into an instance repo. Never touches SPEC.md, tasks/, docs/, or settings.json (diff printed instead). |
+| sync-instance.sh  | Copy the reusable tooling (.claude/ agents, commands, hooks, rules, templates, scripts, PROTOCOL.md) into an instance repo. Never touches SPEC.md, tasks/, docs/, or settings.json (diff printed instead). |
 
 The STATE.md task board lives between `<!-- forge:task-board:begin/end -->` markers
 and is generated, never hand-edited. Instance repos receive these scripts via

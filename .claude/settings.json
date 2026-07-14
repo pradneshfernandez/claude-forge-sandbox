@@ -37,7 +37,19 @@
       "Bash(git push --force:*)",
       "Bash(git push -f:*)",
       "Bash(npm publish:*)",
-      "Bash(sudo:*)"
+      "Bash(sudo:*)",
+      "Read(./**/node_modules/**)",
+      "Read(./**/dist/**)",
+      "Read(./**/build/**)",
+      "Read(./**/coverage/**)",
+      "Read(./**/__pycache__/**)",
+      "Read(./**/vendor/**)",
+      "Read(./**/*.lock)",
+      "Read(./**/package-lock.json)",
+      "Read(./**/yarn.lock)",
+      "Read(./**/pnpm-lock.yaml)",
+      "Read(./**/*.min.js)",
+      "Read(./**/*.min.css)"
     ]
   },
   "hooks": {
@@ -45,16 +57,31 @@
       {
         "matcher": "Bash",
         "hooks": [
-          { "type": "command", "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/audit-log.sh" },
-          { "type": "command", "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/block-secret-strings.sh" }
+          {
+            "type": "command",
+            "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/audit-log.sh"
+          },
+          {
+            "type": "command",
+            "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/block-secret-strings.sh"
+          }
         ]
       },
       {
         "matcher": "Edit|Write",
         "hooks": [
-          { "type": "command", "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/audit-log.sh" },
-          { "type": "command", "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/protect-paths.sh" },
-          { "type": "command", "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/enforce-owns.sh" }
+          {
+            "type": "command",
+            "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/audit-log.sh"
+          },
+          {
+            "type": "command",
+            "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/protect-paths.sh"
+          },
+          {
+            "type": "command",
+            "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/enforce-owns.sh"
+          }
         ]
       }
     ]

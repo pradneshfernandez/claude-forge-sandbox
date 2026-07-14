@@ -1,12 +1,9 @@
-node_modules/
-dist/
-build/
-coverage/
 .env
 .env.*
 !.env.example
 secrets/
-*.log
 .claude/audit/
-.DS_Store
 __pycache__/
+*.pyc
+*.log
+.DS_Store

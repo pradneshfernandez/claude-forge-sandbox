@@ -4,7 +4,7 @@
 #   .claude/scripts/sync-instance.sh /path/to/instance-repo
 #
 # Copies the reusable tooling (agents, commands, hooks, rules, templates,
-# scripts, PROTOCOL.md, .claudeignore) and deletes tooling files the framework
+# scripts, PROTOCOL.md) and deletes tooling files the framework
 # has removed. Never touches instance-owned state: SPEC.md, tasks/, docs/,
 # USER_ACTIONS.md, .claude/CLAUDE.md, or .claude/settings.json (both are
 # tailored per-project; a settings diff is printed instead if it differs).
@@ -18,7 +18,7 @@ DEST="${1:?usage: sync-instance.sh <instance-repo-root>}"
 [ "$(cd "$DEST" && pwd)" = "$SRC" ] && { echo "error: destination is the framework repo itself" >&2; exit 1; }
 
 SYNC_DIRS=".claude/agents .claude/commands .claude/hooks .claude/rules .claude/templates .claude/scripts"
-SYNC_FILES=".claude/PROTOCOL.md .claudeignore"
+SYNC_FILES=".claude/PROTOCOL.md"
 
 for d in $SYNC_DIRS; do
   mkdir -p "$DEST/$d"
