@@ -2,7 +2,7 @@
 
 - **Phase:** dry run complete + wave 3 done (T-005 CI toolchain, T-006 telemetry baseline). T-003 remains deferred, not blocking. No pending tasks.
 - **Current wave:** 3 complete (last executed; waves 4–6 were the todo-cli DAG, done earlier)
-- **Last handoff:** docs/handoff/002-wave3-and-tooling-sync.md
+- **Last handoff:** docs/handoff/003-claude-nested-layout.md
 
 ## Task board
 <!-- forge:task-board:begin -->
