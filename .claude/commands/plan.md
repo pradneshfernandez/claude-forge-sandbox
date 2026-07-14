@@ -1,7 +1,7 @@
 ---
 description: Interview the user and produce SPEC.md + USER_ACTIONS.md for a new project or feature
 ---
-Read framework/PROTOCOL.md §1–3 if not already in context. Then delegate to the
+Read .claude/PROTOCOL.md §1–3 if not already in context. Then delegate to the
 **planner** subagent (model: opus — pin it) with this brief:
 
 "The user wants to build: $ARGUMENTS

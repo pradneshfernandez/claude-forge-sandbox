@@ -1,7 +1,7 @@
 # Forge — plan smart, execute cheap, review hard
 
-This repo runs the Forge orchestration framework. Full protocol: @framework/PROTOCOL.md
-(Read PROTOCOL.md before your first action in any session.)
+This repo runs the Forge orchestration framework. Full protocol: @PROTOCOL.md
+(Read .claude/PROTOCOL.md before your first action in any session.)
 
 ## Pipeline
 1. `/plan` — Opus interviews the user, writes SPEC.md + USER_ACTIONS.md
@@ -14,7 +14,10 @@ This repo runs the Forge orchestration framework. Full protocol: @framework/PROT
 - NEVER assume, guess, mock, stub, or invent: credentials, API keys, URLs, schemas,
   business rules, or requirements. Missing info → STOP. Ask the user directly, or add
   an item to USER_ACTIONS.md and mark the task BLOCKED. No silent compromises.
-- A task may only touch files listed in its `owns:` field.
+- A task may only touch files listed in its `owns:` field (hook-enforced while a
+  wave is in flight).
+- The STATE.md task board is generated: `python3 .claude/scripts/forge-state.py
+  --write`. Never hand-edit the marker block.
 - The implementer of a task NEVER writes or edits its tests. Different agent, always.
 - Pin `model:` explicitly on every subagent invocation. Never rely on inheritance.
 - Blocked after 3 attempts → write tasks/BLOCKED-<id>.md and stop. Do not improvise.

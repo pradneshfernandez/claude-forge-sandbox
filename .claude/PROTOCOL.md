@@ -43,7 +43,7 @@ When information is missing, exactly one of these happens:
    plain question otherwise). One batched set of questions, not a drip.
 2. **User-owned action** (get an API key, create an account, choose a plan, set DNS,
    approve spend) → append an item to USER_ACTIONS.md using
-   framework/templates/USER_ACTION_TEMPLATE.md, mark dependent tasks
+   .claude/templates/USER_ACTION_TEMPLATE.md, mark dependent tasks
    `status: waiting-on-user`, and continue with unblocked work.
 3. **Non-interactive / no unblocked work left** → write tasks/BLOCKED-<id>.md and stop.
 
@@ -87,7 +87,7 @@ silently replaces the real integration.
    task's `tests:` field says so, then run the task's `verify:` command.
 5. Verify pass → status: review. Fail ×3 → status: blocked + BLOCKED file.
 6. Update STATE.md — regenerate the task board with
-   `python3 framework/scripts/forge-state.py --write` (never hand-edit the board),
+   `python3 .claude/scripts/forge-state.py --write` (never hand-edit the board),
    then update the prose sections. Report the wave summary in ≤ 20 lines.
 
 ## 6. Definition of Done (mechanical, not vibes)
@@ -119,7 +119,7 @@ routes BLOCKED files back to the Planner (opus) at the start of the next wave.
 - Command output should be filtered at source: `--quiet`, `| tail`, `--reporter=dot`.
 - One logical task per session. Long sessions degrade quality and multiply cost.
 
-## 9. Security baseline (see also SECURITY.md)
+## 9. Security baseline
 
 - Permissions as code: .claude/settings.json is committed; deny rules cover secrets,
   destructive commands, raw network fetches. CI uses a stricter profile than dev.
@@ -140,12 +140,12 @@ Every /handoff writes docs/handoff/NNN-<slug>.md: decisions made, files changed,
 gotchas, next ready tasks, open USER_ACTIONS. The next session starts by reading
 STATE.md + the latest handoff — and nothing else — to resume.
 
-## 11. Tooling (framework/scripts/)
+## 11. Tooling (.claude/scripts/)
 
 | Script            | Purpose                                                        |
 |-------------------|----------------------------------------------------------------|
 | forge-state.py    | Generate the STATE.md task board from tasks/*.md frontmatter. `--write` updates the marker block, `--check` fails CI on drift. |
-| sync-instance.sh  | Copy the reusable tooling (.claude/ agents, commands, hooks, rules; framework/; .claudeignore) into an instance repo. Never touches SPEC.md, tasks/, docs/, or settings.json (diff printed instead). |
+| sync-instance.sh  | Copy the reusable tooling (.claude/ agents, commands, hooks, rules, templates, scripts, PROTOCOL.md; .claudeignore) into an instance repo. Never touches SPEC.md, tasks/, docs/, or settings.json (diff printed instead). |
 
 The STATE.md task board lives between `<!-- forge:task-board:begin/end -->` markers
 and is generated, never hand-edited. Instance repos receive these scripts via

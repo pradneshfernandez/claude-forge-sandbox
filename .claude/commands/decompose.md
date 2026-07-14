@@ -4,7 +4,7 @@ description: Turn the approved SPEC.md into a parallel task DAG in tasks/
 Preconditions: SPEC.md exists and the user approved it. If not, stop and say so.
 
 Delegate to the **decomposer** subagent (model: opus — pin it): "Read SPEC.md and
-framework/PROTOCOL.md §4. Produce tasks/T-###.md files per TASK_TEMPLATE.md and
+.claude/PROTOCOL.md §4. Produce tasks/T-###.md files per TASK_TEMPLATE.md and
 write the wave table to docs/STATE.md. Maximize parallelism via disjoint ownership
 and interface-first tasks. Default haiku, escalate to sonnet only with a stated
 reason in the task file."

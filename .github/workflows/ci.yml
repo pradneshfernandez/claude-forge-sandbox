@@ -49,4 +49,4 @@ jobs:
       - name: Unit tests (todo-cli)
         run: cd examples/todo-cli && python3 -m unittest discover -s tests -t . -v
       - name: STATE.md drift check
-        run: python3 framework/scripts/forge-state.py --check
+        run: python3 .claude/scripts/forge-state.py --check

@@ -2,7 +2,7 @@
 description: Write the session handoff and update STATE.md — run before ending any session
 ---
 Delegate to **doc-writer** (haiku, pinned): "Write docs/handoff/NNN-<slug>.md from
-framework/templates/HANDOFF_TEMPLATE.md. NNN = next number in docs/handoff/.
+.claude/templates/HANDOFF_TEMPLATE.md. NNN = next number in docs/handoff/.
 Include: wave number, tasks completed/blocked this session, key decisions (link
 ADRs), files changed (from git log since last handoff), gotchas discovered, open
 USER_ACTIONS, and the exact next command to run. Update docs/STATE.md last-session

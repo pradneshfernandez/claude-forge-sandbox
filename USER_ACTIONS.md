@@ -1,7 +1,7 @@
 # User Actions
 
 Things only the human can do. Agents append items here (template:
-framework/templates/USER_ACTION_TEMPLATE.md) instead of guessing, mocking, or
+.claude/templates/USER_ACTION_TEMPLATE.md) instead of guessing, mocking, or
 stubbing. When you finish one, mark it done and tell Claude "UA-<n> done".
 
 ### UA-1: Apply the tailored permissions diff to .claude/settings.json
@@ -28,7 +28,8 @@ stubbing. When you finish one, mark it done and tell Claude "UA-<n> done".
 - **Why it's needed (if you choose to do it later):** Merge gates must be enforced by
   GitHub, not by the agent.
 - **Exact steps (when applicable):**
-  1. Edit .github/CODEOWNERS — replace @YOUR_GITHUB_USERNAME with your handle.
+  1. Create .github/CODEOWNERS with your handle as owner of .claude/ and
+     .github/ (the placeholder file was dropped in the 2026-07-14 slim-down).
   2. GitHub → repo → Settings → Branches → Add branch protection rule for `main`.
   3. Enable: Require a pull request before merging; Require review from Code Owners;
      Require status checks (select: secret-scan, sast, dependency-review, test-and-lint).
