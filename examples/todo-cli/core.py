@@ -43,6 +43,31 @@ def mark_done(todos: list, todo_id: int) -> list:
     raise KeyError(todo_id)
 
 
+def edit_todo(todos: list, todo_id: int, text: str) -> list:
+    """Edit a todo's text.
+
+    Args:
+        todos: List of todo dicts.
+        todo_id: ID of the todo to edit.
+        text: New todo text (will be stripped).
+
+    Returns:
+        The updated todos list.
+
+    Raises:
+        KeyError: If todo_id is not found.
+        ValueError: If text is empty after stripping.
+    """
+    for todo in todos:
+        if todo["id"] == todo_id:
+            stripped = text.strip()
+            if not stripped:
+                raise ValueError("Text cannot be empty")
+            todo["text"] = stripped
+            return todos
+    raise KeyError(todo_id)
+
+
 def remove_todo(todos: list, todo_id: int) -> list:
     """Remove a todo from the list.
 

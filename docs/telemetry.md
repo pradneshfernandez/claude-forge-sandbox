@@ -50,4 +50,30 @@ What is verifiable from the repo itself:
 
 | Date | Wave | Tasks | Session model | /context floor | /usage total | Tool calls (audit Δ) |
 |------|------|-------|---------------|----------------|--------------|-----------------------|
+| 2026-07-25 | 7 | T-011 | orchestrator: Sonnet 5; both subagents: sonnet (pinned) | n/a¹ | n/a¹ | n/a¹ |
 | _—_  | _next wave: start here_ | | | | | |
+
+¹ The orchestrating session for this wave was launched from outside the sandbox
+repo's own Claude Code root, so its `.claude/audit/` hooks never fired and
+`/context`/`/usage` (interactive-CLI-only meta-commands) weren't queryable via
+tool calls. What IS real, measured data — reported directly by each subagent's
+completion event, not estimated — for wave 7 (adding `todo edit`, T-011):
+
+| Subagent | Role | Tokens | Tool calls | Duration |
+|----------|------|--------|-----------|----------|
+| a1aa618730cb6ba5e | implementer-heavy (T-011: core.py + todo.py) | 30,283 | 8 | 29.8s |
+| acb9cb055c4a5f993 | test-writer (test_core.py + test_todo.py) | 32,605 | 5 | 30.6s |
+| **Total** | | **62,888** | **13** | **~60s wall (sequential)** |
+
+Outcome: tests 47 → 61 (+14, all passing), verify command exits 0, 0 BLOCKED
+escalations, 0 review rounds beyond first pass (test-writer's independent tests
+passed against the implementer's first attempt), files touched exactly matched
+each task's `owns:`/`tests:` declaration (checked via `git status` equivalent —
+diff scoped to core.py, todo.py, test_core.py, test_todo.py, plus the
+bookkeeping files SPEC.md/STATE.md/tasks/T-011.md).
+
+To get a true `/context` + `/usage` orchestrator-side number, the next wave
+must be run from an interactive `claude` session rooted at
+`claude-forge-project-files/claude-forge-sandbox` itself (not from this
+parent-directory session) — run `/context` before, `/execute-wave`, then
+`/usage` after, per the steps above.

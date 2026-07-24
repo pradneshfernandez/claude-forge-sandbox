@@ -27,6 +27,10 @@ not to ship a production tool.
   - `todo list` → print all todos, one per line: `<id> [ ] text` / `<id> [x] text`.
   - `todo done <id>` → set `done=true`; error to stderr + exit 1 if id absent.
   - `todo rm <id>` → delete the todo; error to stderr + exit 1 if id absent.
+  - `todo edit <id> "<new text>"` → replace the todo's text; error to stderr + exit 1
+    if id absent or new text is empty after `.strip()` (same rule as `add`). Does
+    NOT change `done` state. Added post-dry-run (wave 7, T-011) to measure a real
+    /execute-wave; see docs/telemetry.md.
 - Persistence to a single JSON file (see Data model).
 - File + parent dir auto-created on first write if missing.
 - Storage path: `~/.todo-cli/todos.json` (ADR-002), overridable via the `TODO_FILE`
@@ -37,7 +41,7 @@ not to ship a production tool.
 ### Explicit NON-goals
 - No sync, no multi-user, no auth/accounts, no network access.
 - No recurring tasks, due dates, reminders, priorities, tags, or search.
-- No undo/history; no editing task text after creation.
+- No undo/history; no editing of `done` state via `edit` (use `done`), no edit history.
 - No config file (only the `TODO_FILE` env var for path override).
 - No TUI / colors / interactive prompts.
 - No third-party dependencies; no packaging/PyPI publish; no build step.

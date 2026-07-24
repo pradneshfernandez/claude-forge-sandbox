@@ -1,7 +1,7 @@
 # Project State
 
-- **Phase:** dry run complete + wave 3 done (T-005 CI toolchain, T-006 telemetry baseline). T-003 remains deferred, not blocking. No pending tasks.
-- **Current wave:** 3 complete (last executed; waves 4–6 were the todo-cli DAG, done earlier)
+- **Phase:** dry run complete; wave 7 done — first post-dry-run feature (`todo edit`), run to capture a real /execute-wave telemetry measurement (docs/telemetry.md). T-003 remains deferred, not blocking. No pending tasks.
+- **Current wave:** 7 complete (T-011 done; waves 1–6 done earlier)
 - **Last handoff:** docs/handoff/003-claude-nested-layout.md
 
 ## Task board
@@ -18,6 +18,7 @@
 | T-008 | Implement core.py pure todo operations | done | 5 | haiku | examples/todo-cli/core.py |
 | T-009 | Implement storage.py JSON persistence with atomic writes | done | 5 | haiku | examples/todo-cli/storage.py |
 | T-010 | Implement todo.py argparse CLI wiring core and storage | done | 6 | sonnet | examples/todo-cli/todo.py |
+| T-011 | Implement `todo edit <id> "<text>"` (core.py + todo.py) | done | 7 | sonnet | examples/todo-cli/core.py … |
 
 **Ready now:** none
 
@@ -33,9 +34,11 @@ The board above is generated: `python3 .claude/scripts/forge-state.py --write`
 | 4 | T-007 | — | Interface-first: package dir + tests/__init__.py so unittest discovery works |
 | 5 | T-008, T-009 | T-007 | Disjoint owns (core.py vs storage.py); no import between them; run in parallel |
 | 6 | T-010 | T-008, T-009 | Integration CLI wiring both modules |
+| 7 | T-011 | — | New feature (todo edit), not part of the original todo-cli DAG; run to measure a real wave for docs/telemetry.md |
 
 Test files are written by the test-writer (not the implementer), per each task's `tests:` field:
-T-008 → tests/test_core.py, T-009 → tests/test_storage.py, T-010 → tests/test_todo.py.
+T-008 → tests/test_core.py, T-009 → tests/test_storage.py, T-010 → tests/test_todo.py,
+T-011 → tests/test_core.py + tests/test_todo.py (appended, not new files).
 
 ## Blocked
 _None._

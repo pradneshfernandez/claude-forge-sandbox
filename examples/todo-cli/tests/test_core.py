@@ -64,6 +64,57 @@ class MarkDoneTests(unittest.TestCase):
             core.mark_done([], 1)
 
 
+class EditTodoTests(unittest.TestCase):
+    def test_missing_id_raises_key_error(self):
+        todos = [{"id": 1, "text": "a", "done": False}]
+        with self.assertRaises(KeyError):
+            core.edit_todo(todos, 99, "new text")
+
+    def test_edit_on_empty_list_raises_key_error(self):
+        with self.assertRaises(KeyError):
+            core.edit_todo([], 1, "new text")
+
+    def test_present_id_replaces_text_only_that_item(self):
+        todos = [
+            {"id": 1, "text": "a", "done": False},
+            {"id": 2, "text": "b", "done": False},
+        ]
+        result = core.edit_todo(todos, 2, "new b")
+        self.assertEqual(result[1]["text"], "new b")
+        self.assertEqual(result[0]["text"], "a")
+
+    def test_edit_leaves_done_state_untouched(self):
+        todos = [{"id": 1, "text": "a", "done": True}]
+        result = core.edit_todo(todos, 1, "new a")
+        self.assertTrue(result[0]["done"])
+
+    def test_edit_returns_same_list_object_mutated(self):
+        todos = [{"id": 1, "text": "a", "done": False}]
+        result = core.edit_todo(todos, 1, "new a")
+        self.assertIs(result, todos)
+
+    def test_edit_strips_leading_and_trailing_whitespace(self):
+        todos = [{"id": 1, "text": "a", "done": False}]
+        result = core.edit_todo(todos, 1, "  new a  ")
+        self.assertEqual(result[0]["text"], "new a")
+
+    def test_edit_whitespace_only_text_raises_value_error(self):
+        todos = [{"id": 1, "text": "a", "done": False}]
+        with self.assertRaises(ValueError):
+            core.edit_todo(todos, 1, "   ")
+
+    def test_edit_empty_string_text_raises_value_error(self):
+        todos = [{"id": 1, "text": "a", "done": False}]
+        with self.assertRaises(ValueError):
+            core.edit_todo(todos, 1, "")
+
+    def test_missing_id_checked_before_empty_text(self):
+        # Both the id is missing and the text is empty; KeyError must win.
+        todos = [{"id": 1, "text": "a", "done": False}]
+        with self.assertRaises(KeyError):
+            core.edit_todo(todos, 99, "   ")
+
+
 class RemoveTodoTests(unittest.TestCase):
     def test_missing_id_raises_key_error(self):
         todos = [{"id": 1, "text": "a", "done": False}]

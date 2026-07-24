@@ -126,6 +126,51 @@ class RmCommandTests(TodoCliTestCase):
         self.assertNotEqual(err, "")
 
 
+class EditCommandTests(TodoCliTestCase):
+    def test_edit_updates_store_returns_0(self):
+        self._run(["add", "buy milk"])
+        code, out, err = self._run(["edit", "1", "new text"])
+        self.assertEqual(code, 0)
+        self.assertEqual(err, "")
+        data = self._read_store()
+        self.assertEqual(data[0]["text"], "new text")
+
+    def test_edit_leaves_done_state_untouched(self):
+        self._run(["add", "buy milk"])
+        self._run(["done", "1"])
+        code, out, err = self._run(["edit", "1", "new text"])
+        self.assertEqual(code, 0)
+        data = self._read_store()
+        self.assertTrue(data[0]["done"])
+        self.assertEqual(data[0]["text"], "new text")
+
+    def test_edit_unknown_id_errors_returns_1_store_unchanged(self):
+        self._run(["add", "buy milk"])
+        before = self._read_store()
+
+        code, out, err = self._run(["edit", "99", "x"])
+        self.assertEqual(code, 1)
+        self.assertNotEqual(err, "")
+
+        after = self._read_store()
+        self.assertEqual(before, after)
+
+    def test_edit_empty_text_errors_returns_1_store_unchanged(self):
+        self._run(["add", "buy milk"])
+        before = self._read_store()
+
+        code, out, err = self._run(["edit", "1", "   "])
+        self.assertEqual(code, 1)
+        self.assertNotEqual(err, "")
+
+        after = self._read_store()
+        self.assertEqual(before, after)
+
+    def test_edit_non_integer_id_raises_systemexit(self):
+        with self.assertRaises(SystemExit):
+            todo.main(["edit", "abc", "text"])
+
+
 class CorruptStoreTests(TodoCliTestCase):
     def test_corrupt_store_returns_2(self):
         with open(self._store_path, "w") as f:

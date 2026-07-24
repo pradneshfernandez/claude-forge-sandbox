@@ -20,6 +20,10 @@ def build_parser() -> argparse.ArgumentParser:
     rm_parser = subparsers.add_parser("rm")
     rm_parser.add_argument("id", type=int)
 
+    edit_parser = subparsers.add_parser("edit")
+    edit_parser.add_argument("id", type=int)
+    edit_parser.add_argument("text", type=str)
+
     return parser
 
 
@@ -64,6 +68,18 @@ def main(argv: list | None = None) -> int:
             core.remove_todo(todos, args.id)
         except KeyError:
             print(f"error: no todo with id {args.id}", file=sys.stderr)
+            return 1
+        storage.save(path, todos)
+        return 0
+
+    if args.cmd == "edit":
+        try:
+            core.edit_todo(todos, args.id, args.text)
+        except KeyError:
+            print(f"error: no todo with id {args.id}", file=sys.stderr)
+            return 1
+        except ValueError as e:
+            print(f"error: {e}", file=sys.stderr)
             return 1
         storage.save(path, todos)
         return 0
