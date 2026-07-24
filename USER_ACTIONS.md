@@ -20,22 +20,28 @@ stubbing. When you finish one, mark it done and tell Claude "UA-<n> done".
 - **When done:** tell Claude "UA-1 done".
 
 ### UA-2: Set CODEOWNERS and branch protection on GitHub
-- **Status:** deferred (not blocking) — no git remote is configured for this repo, so
-  there's no GitHub repo to protect yet, and Forge is meant to be a generic, load-anywhere
-  framework rather than one hardcoded to a GitHub handle. This is optional hardening for
-  whenever/if this repo (or a copy of it) is pushed somewhere with real reviewers.
+- **Status:** skipped (2026-07-25, user decision) — see reasoning below.
 - **Blocks:** T-003 (T-003 itself blocks nothing else — T-004 does not depend on it)
-- **Why it's needed (if you choose to do it later):** Merge gates must be enforced by
-  GitHub, not by the agent.
+- **Required or optional:** optional hardening, not required.
+- **What this actually does:** CODEOWNERS maps file paths to GitHub usernames so
+  GitHub auto-requests them as PR reviewers; paired with a branch-protection
+  checkbox, it can also block merging until that reviewer approves. It does
+  nothing else — it doesn't restrict who can push directly to a branch.
+- **Skip if:** you're the sole committer and push directly to `main` (no PR
+  workflow). Both repos here match that today, so CODEOWNERS would be a
+  live-nobody file and branch protection's PR-review gate would never trigger.
+- **Why it's needed (when it applies):** once there are other contributors or
+  you switch to a PR-based workflow, this is how you'd enforce human review of
+  agent-written changes before merge.
 - **Exact steps (when applicable):**
   1. Create .github/CODEOWNERS with your handle as owner of .claude/ and
-     .github/ (the placeholder file was dropped in the 2026-07-14 slim-down).
+     .github/.
   2. GitHub → repo → Settings → Branches → Add branch protection rule for `main`.
   3. Enable: Require a pull request before merging; Require review from Code Owners;
-     Require status checks (select: secret-scan, sast, dependency-review, test-and-lint).
+     Require status checks (select: test-and-lint).
 - **Where to put it:** GitHub repository settings
 - **Cost/plan implications:** free on public repos; private repos need a paid plan for some rules
-- **When done:** tell Claude "UA-2 done" (or leave it deferred indefinitely).
+- **When done:** revisit if/when this project gets a second contributor or moves to a PR workflow.
 
 ### UA-3: Paste the generated CI toolchain job into ci.yml
 - **Status:** done (2026-07-14) — the user directed the orchestrating session to apply

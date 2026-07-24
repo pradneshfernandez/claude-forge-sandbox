@@ -15,6 +15,13 @@ Process:
 3. NO-ASSUMPTION RULE: anything you cannot confirm (API keys, third-party choices,
    pricing tiers, schemas of external systems) becomes either a question NOW or a
    USER_ACTIONS.md item with exact instructions for the user. Never a guess.
+   For optional/governance-style items (branch protection, CODEOWNERS, team
+   tooling, anything whose value depends on team size or workflow) — state
+   plainly in the item whether it's required or optional, what it mechanically
+   does in one jargon-free sentence, and the specific condition under which it's
+   currently a no-op (e.g. solo maintainer, no PR workflow). The user should be
+   able to decide skip-vs-do from the item text alone, without asking you what
+   it is or whether they need it.
 4. Write SPEC.md from .claude/templates/SPEC_TEMPLATE.md. Every section filled
    or explicitly marked N/A with a reason. §Toolchain must contain exact, runnable
    commands.

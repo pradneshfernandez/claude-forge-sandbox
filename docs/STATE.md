@@ -1,6 +1,6 @@
 # Project State
 
-- **Phase:** dry run complete; wave 7 done — first post-dry-run feature (`todo edit`), run to capture a real /execute-wave telemetry measurement (docs/telemetry.md). T-003 remains deferred, not blocking. No pending tasks.
+- **Phase:** dry run complete; wave 7 done — first post-dry-run feature (`todo edit`), run to capture a real /execute-wave telemetry measurement (docs/telemetry.md). T-003 skipped by user decision (UA-2). No pending tasks.
 - **Current wave:** 7 complete (T-011 done; waves 1–6 done earlier)
 - **Last handoff:** docs/handoff/003-claude-nested-layout.md
 
@@ -10,7 +10,7 @@
 |----|-------|--------|------|-------|-----------------|
 | T-001 | Verify policy hooks fire correctly | done | 1 | haiku | .claude/audit/ |
 | T-002 | Tailor permission allow-list to the project toolchain | done | 1 | haiku | — |
-| T-003 | Wire repository governance (CODEOWNERS, branch protection) | deferred | 1 | haiku | — |
+| T-003 | Wire repository governance (CODEOWNERS, branch protection) | skipped | 1 | haiku | — |
 | T-004 | Pipeline dry run on a toy spec | done | 2 | sonnet | SPEC.md … |
 | T-005 | Generate CI toolchain jobs from SPEC | done | 3 | haiku | — |
 | T-006 | Token telemetry baseline | done | 3 | haiku | docs/telemetry.md |
@@ -44,5 +44,7 @@ T-011 → tests/test_core.py + tests/test_todo.py (appended, not new files).
 _None._
 
 ## Waiting on user
-T-003 (UA-2) — deferred indefinitely (optional GitHub branch-protection hardening).
-Confirm the GitHub Actions run is green after the latest push (UA-3 follow-up).
+_None._ T-003 (UA-2) skipped 2026-07-25 — solo maintainer, no PR workflow, so
+CODEOWNERS/branch protection would be inert; revisit if that changes. Both
+repos' GitHub Actions runs confirmed green through the latest push (wave 7,
+commit 012b70d on the sandbox).
